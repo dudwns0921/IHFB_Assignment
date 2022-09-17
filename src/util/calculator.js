@@ -4,16 +4,18 @@ class Calculator {
   #units = [];
   #currentNum = [];
 
-  #isLastUnitSign() {
-    return /[+ㅡ×÷%.]/.test(this.#units[this.#units.length - 1]);
+  #lastUnit() {
+    return this.#units[this.#units.length - 1];
+  }
+
+  #lastCurrentNum() {
+    return this.#currentNum[this.#currentNum.length - 1];
   }
 
   insert(str) {
     if (/[+ㅡ×÷%.]/.test(str)) {
-      // 입력된 글자가 기호인지 판단
       if (/[+ㅡ×÷%]/.test(str)) {
         this.#currentNum = [];
-        // 연산 기호일 경우 현재 숫자를 초기화
       } else if (str === '.') {
         if (this.#currentNum.includes('.')) return;
         if (this.#currentNum.length === 0) {
@@ -26,8 +28,10 @@ class Calculator {
           this.#currentNum.push(str);
         }
       }
-      if (this.#isLastUnitSign() || this.#units.length === 0) return;
+      if (/[+ㅡ×÷%.]/.test(this.#lastUnit()) || this.#units.length === 0) return;
     } else {
+      if (this.#currentNum.length === MAX_LEN) return;
+      if (this.#lastCurrentNum() === '0' && this.#currentNum.length === 1) return;
       this.#currentNum.push(str);
     }
     this.#units.push(str);
