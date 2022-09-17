@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import styled from 'styled-components';
 
 const DisplayContainer = styled.div`
@@ -21,10 +22,13 @@ const DisplayResult = styled.div`
 `;
 
 function Display() {
+  const formula = useSelector(state => state.formula.value);
+  const result = useSelector(state => state.result.value);
+
   return (
     <DisplayContainer>
-      <DisplayFormula>1,000+10.2+1312312312312312312</DisplayFormula>
-      <DisplayResult>123129482</DisplayResult>
+      <DisplayFormula>{formula}</DisplayFormula>
+      <DisplayResult>{result}</DisplayResult>
     </DisplayContainer>
   );
 }

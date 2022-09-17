@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import {DARK_COLORS, KEYS} from '../constants/constants';
 import PropTypes from 'prop-types';
+import {useDispatch} from 'react-redux';
+import {insert} from '../features/calculate/formulaSlice';
 
 const KeypadBottomContainer = styled.div`
   width: 100%;
@@ -46,7 +48,17 @@ const Btn = styled.div`
 `;
 
 function KeypadBtn({txt, btnType}) {
-  return <Btn btnType={btnType}>{txt}</Btn>;
+  const dispatch = useDispatch();
+  const returnOnClickFunc = txt => {
+    return function onClickFunc() {
+      dispatch(insert(txt));
+    };
+  };
+  return (
+    <Btn btnType={btnType} onClick={returnOnClickFunc(txt)}>
+      {txt}
+    </Btn>
+  );
 }
 
 KeypadBtn.propTypes = {
