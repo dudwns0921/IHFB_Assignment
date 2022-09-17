@@ -6,12 +6,11 @@ export const formulaSlice = createSlice({
     value: '',
   },
   reducers: {
-    insert: (state, action) => {
-      console.log(state, action.payload);
-      state.value += action.payload;
+    equal: (state, action) => {
+      state.value = action.payload;
     },
   },
 });
 
-export const {insert} = formulaSlice.actions;
+export const {equal} = formulaSlice.actions;
 export default formulaSlice.reducer;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {createGlobalStyle} from 'styled-components';
 import styled from 'styled-components';
 import reset from 'styled-reset';
@@ -7,6 +7,7 @@ import KeypadTop from './components/KeypadTop';
 import KeypadBottom from './components/KeypadBottom';
 import NotoSansRegular from './asset/fonts/NotoSansKR-Thin.otf';
 import {DARK_COLORS} from './constants/constants';
+import {initCal} from './util';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -34,15 +35,24 @@ const Divider = styled.div`
 `;
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    initCal();
+    setLoading(false);
+  }, []);
   return (
     <React.Fragment>
       <GlobalStyles />
-      <AppContainer>
-        <Display></Display>
-        <KeypadTop></KeypadTop>
-        <Divider></Divider>
-        <KeypadBottom></KeypadBottom>
-      </AppContainer>
+      {loading ? (
+        'Loading...'
+      ) : (
+        <AppContainer>
+          <Display></Display>
+          <KeypadTop></KeypadTop>
+          <Divider></Divider>
+          <KeypadBottom></KeypadBottom>
+        </AppContainer>
+      )}
     </React.Fragment>
   );
 }

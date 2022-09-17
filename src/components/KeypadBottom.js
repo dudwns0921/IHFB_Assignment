@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import {DARK_COLORS, KEYS} from '../constants/constants';
 import PropTypes from 'prop-types';
 import {useDispatch} from 'react-redux';
-import {insert} from '../features/calculate/formulaSlice';
+import {equal} from '../features/calculate/formulaSlice';
+import Calculator from '../util/calculator';
 
 const KeypadBottomContainer = styled.div`
   width: 100%;
@@ -51,7 +52,8 @@ function KeypadBtn({txt, btnType}) {
   const dispatch = useDispatch();
   const returnOnClickFunc = txt => {
     return function onClickFunc() {
-      dispatch(insert(txt));
+      window.cal.insert(txt);
+      dispatch(equal(window.cal.getFormula()));
     };
   };
   return (
