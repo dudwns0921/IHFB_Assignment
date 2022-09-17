@@ -1,10 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
 import {DARK_COLORS, KEYS} from '../constants/constants';
 import PropTypes from 'prop-types';
 import {useDispatch} from 'react-redux';
 import {equal} from '../features/calculate/formulaSlice';
-import Calculator from '../util/calculator';
 
 const KeypadBottomContainer = styled.div`
   width: 100%;
@@ -48,31 +46,48 @@ const Btn = styled.div`
   }};
 `;
 
-function KeypadBtn({txt, btnType}) {
+function KeypadBtn({item}) {
   const dispatch = useDispatch();
-  const returnOnClickFunc = txt => {
+  const returnOnClickFunc = item => {
     return function onClickFunc() {
-      window.cal.insert(txt);
+      if (item.type && item.type !== 'sign') {
+        switch (item.type) {
+          case 'clear':
+            window.cal.clear();
+            break;
+          case 'reverse':
+            window.cal.reverse();
+            break;
+          case 'equal':
+            window.cal.calculate();
+            break;
+        }
+      } else {
+        window.cal.insert(item.txt);
+      }
       dispatch(equal(window.cal.getFormula()));
     };
   };
   return (
-    <Btn btnType={btnType} onClick={returnOnClickFunc(txt)}>
-      {txt}
+    <Btn btnType={item.type} onClick={returnOnClickFunc(item)}>
+      {item.txt}
     </Btn>
   );
 }
 
 KeypadBtn.propTypes = {
-  txt: PropTypes.string,
-  btnType: PropTypes.string,
+  item: PropTypes.shape({
+    txt: PropTypes.string,
+    type: PropTypes.string,
+    exec: PropTypes.func,
+  }),
 };
 
 function KeypadBottom() {
   return (
     <KeypadBottomContainer>
       {KEYS.map(item => {
-        return <KeypadBtn key={item.txt} txt={item.txt} btnType={item.type} />;
+        return <KeypadBtn key={item.txt} item={item} />;
       })}
     </KeypadBottomContainer>
   );

@@ -15,7 +15,7 @@ export const KEYS = [
   {txt: '2'},
   {txt: '3'},
   {txt: '+', type: 'sign'},
-  {txt: '+/-'},
+  {txt: '+/-', type: 'reverse'},
   {txt: '0'},
   {txt: '.'},
   {txt: '=', type: 'equal'},
