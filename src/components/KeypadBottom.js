@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import {DARK_COLORS, KEYS} from '../constants/constants';
 import PropTypes from 'prop-types';
 import {useDispatch} from 'react-redux';
-import {equal} from '../features/calculate/formulaSlice';
+import {display} from '../features/calculate/formulaSlice';
+import {equal} from '../features/calculate/resultSlice';
 
 const KeypadBottomContainer = styled.div`
   width: 100%;
@@ -50,7 +51,7 @@ function KeypadBtn({item}) {
   const dispatch = useDispatch();
   const returnOnClickFunc = item => {
     return function onClickFunc() {
-      if (item.type && item.type !== 'sign') {
+      if (item.type && item.type !== 'operator') {
         switch (item.type) {
           case 'clear':
             window.cal.clear();
@@ -59,13 +60,13 @@ function KeypadBtn({item}) {
             window.cal.reverse();
             break;
           case 'equal':
-            window.cal.calculate();
+            dispatch(equal(window.cal.calculate()));
             break;
         }
       } else {
         window.cal.insert(item.txt);
       }
-      dispatch(equal(window.cal.getFormula()));
+      dispatch(display(window.cal.getFormula()));
     };
   };
   return (

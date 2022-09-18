@@ -6,11 +6,11 @@ export const resultSlice = createSlice({
     value: 0,
   },
   reducers: {
-    calculate: (state, action) => {
+    equal: (state, action) => {
       state.value = action.payload;
     },
   },
 });
 
-export const {calculate} = resultSlice.actions;
+export const {equal} = resultSlice.actions;
 export default resultSlice.reducer;

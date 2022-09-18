@@ -23,6 +23,110 @@ class Calculator {
     }
   }
 
+  #operate(num1, num2, operator) {
+    if (operator === '+') {
+      return num1 + num2;
+    } else if (operator === '-') {
+      return num1 - num2;
+    } else if (operator === '*') {
+      return num1 * num2;
+    } else if (operator === '/') {
+      return num1 / num2;
+    } else {
+      return num1 % num2;
+    }
+  }
+
+  #createPostfix() {
+    let operatorStack = [];
+    let postFix = [];
+    let negative = [];
+    let num = [];
+    let isNegative = false;
+    for (let unit of this.#units) {
+      if (/[+ㅡ×÷%]/.test(unit)) {
+        if (num.length !== 0) {
+          postFix.push(num.join(''));
+          num = [];
+        }
+        switch (unit) {
+          case 'ㅡ':
+            unit = '-';
+            break;
+          case '×':
+            unit = '*';
+            break;
+          case '÷':
+            unit = '/';
+            break;
+        }
+        if (operatorStack.length === 0) {
+          operatorStack.unshift(unit);
+          continue;
+        }
+        switch (this.#compareOpPriority(operatorStack.at(0), unit)) {
+          case true:
+            operatorStack.unshift(unit);
+            continue;
+          case false: {
+            const tmpStackOperator = operatorStack.shift();
+            postFix.push(tmpStackOperator);
+            operatorStack.unshift(unit);
+            continue;
+          }
+          default:
+            operatorStack.unshift(unit);
+            continue;
+        }
+      } else if (unit === '(') {
+        isNegative = !isNegative;
+      } else if (unit === ')') {
+        negative.push(unit);
+        const negativeConverted = negative.join('').replaceAll(/[()]/g, '');
+        postFix.push(negativeConverted);
+
+        isNegative = !isNegative;
+        negative = [];
+        continue;
+      }
+      if (isNegative) {
+        negative.push(unit);
+      } else {
+        num.push(unit);
+      }
+    }
+    if (num.length !== 0) {
+      postFix.push(num.join(''));
+      num = [];
+    }
+    for (const operator of operatorStack) {
+      postFix.push(operator);
+    }
+    return postFix;
+  }
+
+  #getOpPriority(op) {
+    switch (op) {
+      case '*':
+      case '/':
+      case '%':
+        return 2;
+      case '+':
+      case '-':
+        return 1;
+    }
+  }
+
+  #compareOpPriority(stackOp, currOp) {
+    const stackOpPriority = this.#getOpPriority(stackOp);
+    const currOpPriority = this.#getOpPriority(currOp);
+    if (stackOpPriority < currOpPriority) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   insert(str) {
     if (/[+ㅡ×÷%.]/.test(str)) {
       if (/[+ㅡ×÷%]/.test(str)) {
@@ -46,6 +150,7 @@ class Calculator {
         if (this.#isReverse) {
           this.#units.pop();
           this.#currentNum.pop();
+
           this.#units.push(str, ')');
           this.#currentNum.push(str, ')');
           return;
@@ -61,6 +166,7 @@ class Calculator {
       if (this.#isReverse) {
         this.#units.pop();
         this.#currentNum.pop();
+
         this.#units.push(str, ')');
         this.#currentNum.push(str, ')');
         return;
@@ -101,7 +207,21 @@ class Calculator {
   }
 
   calculate() {
-    console.log('calculate units');
+    let result = [];
+    const postfix = this.#createPostfix();
+    for (const unit of postfix) {
+      if (/[-+*/%]/.test(unit)) {
+        const num2 = parseFloat(result.shift());
+        const num1 = parseFloat(result.shift());
+        result.unshift(this.#operate(num1, num2, unit));
+      } else {
+        result.unshift(unit);
+      }
+    }
+    const resultConverted = String(result[0]).split('');
+    this.#units = [...resultConverted];
+    this.#currentNum = [...resultConverted];
+    return result[0];
   }
 
   getFormula() {

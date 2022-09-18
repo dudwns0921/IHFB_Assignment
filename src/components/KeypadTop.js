@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import deleteIcon from '../asset/images/delete.svg';
 import {useDispatch} from 'react-redux';
-import {equal} from '../features/calculate/formulaSlice';
+import {display} from '../features/calculate/formulaSlice';
 
 const KeypadTopContainer = styled.div`
   display: flex;
@@ -33,7 +33,7 @@ function KeypadTop() {
       <DeleteBtn
         onClick={() => {
           window.cal.delete();
-          dispatch(equal(window.cal.getFormula()));
+          dispatch(display(window.cal.getFormula()));
         }}
       />
     </KeypadTopContainer>

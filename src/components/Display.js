@@ -19,6 +19,9 @@ const DisplayFormula = styled.div`
 `;
 const DisplayResult = styled.div`
   padding-bottom: 20px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 function Display() {
