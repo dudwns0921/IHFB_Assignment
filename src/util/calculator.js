@@ -3,13 +3,24 @@ const MAX_LEN = 12;
 class Calculator {
   #units = [];
   #currentNum = [];
+  #isReverse = false;
 
   #lastUnit() {
-    return this.#units[this.#units.length - 1];
+    return this.#units.at(-1);
   }
 
   #lastCurrentNum() {
-    return this.#currentNum[this.#currentNum.length - 1];
+    return this.#currentNum.at(-1);
+  }
+
+  #reverseCurrentNum() {
+    if (this.#isReverse) {
+      this.#currentNum = ['(', '-', ...this.#currentNum, ')'];
+    } else {
+      this.#currentNum.pop();
+      this.#currentNum.shift();
+      this.#currentNum.shift();
+    }
   }
 
   insert(str) {
@@ -46,7 +57,24 @@ class Calculator {
   }
 
   reverse() {
-    console.log('reverse unit');
+    this.#isReverse = !this.#isReverse;
+    if (this.#currentNum.length === 0) return;
+    if (this.#units.length === this.#currentNum.length) {
+      this.#units = [];
+      this.#reverseCurrentNum();
+      this.#units = this.#currentNum;
+    } else {
+      let idx = -1;
+      while (!/[+ㅡ×÷%]/.test(this.#units.at(idx))) {
+        idx--;
+      }
+      this.#units = this.#units.slice(0, idx + 1);
+      this.#reverseCurrentNum();
+      for (const letter of this.#currentNum) {
+        this.#units.push(letter);
+      }
+    }
+    // 부호가 있을 때
   }
 
   calculate() {
