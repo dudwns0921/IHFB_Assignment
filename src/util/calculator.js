@@ -128,6 +128,11 @@ class Calculator {
   }
 
   insert(str) {
+    if (str === '()') {
+      alert('아직 구현하지 못한 기능입니다.');
+      return;
+    }
+
     if (/[+ㅡ×÷%.]/.test(str)) {
       if (/[+ㅡ×÷%]/.test(str)) {
         if (this.#lastUnit() === '.') {
