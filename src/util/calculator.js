@@ -25,6 +25,7 @@ class Calculator {
 
   #operate(num1, num2, operator) {
     if (operator === '+') {
+      console.log(num1, num2, num1 + num2);
       return num1 + num2;
     } else if (operator === '-') {
       return num1 - num2;
@@ -215,7 +216,9 @@ class Calculator {
     let result = [];
     const postfix = this.#createPostfix();
     for (const unit of postfix) {
-      if (/[-+*/%]/.test(unit)) {
+      if (/[-]\d*/.test(unit)) {
+        result.unshift(unit);
+      } else if (/[-+*/%]/.test(unit)) {
         const num2 = parseFloat(result.shift());
         const num1 = parseFloat(result.shift());
         result.unshift(this.#operate(num1, num2, unit));

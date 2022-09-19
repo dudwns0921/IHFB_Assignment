@@ -20,6 +20,40 @@
 
 **Calculator**에서는 `eval()`을 사용할 수 없고, 사칙연산의 우선순위를 반영해야 하기 때문에 중위 표기법으로 입력된 수식을 후위 표기법으로 바꿔서 계산을 진행합니다.
 
+## ⚙기능
+
+### 사칙연산 계산
+
+문자열로 입력된 수식을 후위표기법으로 바꿔서 계산하기 때문에 긴 수식이라도 모두 계산이 가능합니다.
+
+<img src="md-images/image-20220919094450006.png" alt="image-20220919094450006" style="zoom:50%;" />	<img src="md-images/image-20220919094508947.png" alt="image-20220919094508947" style="zoom:50%;" />		
+
+음수도 계산 가능합니다.
+
+<img src="md-images/image-20220919100437045.png" alt="image-20220919100437045" style="zoom:50%;" />	<img src="md-images/image-20220919100453973.png" alt="image-20220919100453973" style="zoom:50%;" />	
+
+소수도 계산 가능합니다.
+
+<img src="md-images/image-20220919100617654.png" alt="image-20220919100617654" style="zoom:50%;" />	<img src="md-images/image-20220919100632453.png" alt="image-20220919100632453" style="zoom:50%;" />`
+
+### 지우기
+
+입력한 수식을 뒤에서부터 한 칸씩 지웁니다.
+
+<img src="md-images/image-20220919094644618.png" alt="image-20220919094644618" style="zoom:50%;" />	<img src="md-images/image-20220919094712403.png" alt="image-20220919094712403" style="zoom:50%;" />			
+
+### 초기화
+
+입력한 수식을 모두 초기화합니다.
+
+<img src="md-images/image-20220919094847351.png" alt="image-20220919094847351" style="zoom:50%;" />	<img src="md-images/image-20220919094906718.png" alt="image-20220919094906718" style="zoom:50%;" />	
+
+### 부호변경
+
+입력한 숫자의 부호를 변경합니다. 
+
+<img src="md-images/image-20220919094956075.png" alt="image-20220919094956075" style="zoom:50%;" />	<img src="md-images/image-20220919095010542.png" alt="image-20220919095010542" style="zoom:50%;" />			
+
 ## 🤔기타 참고사항
 
 아직 완벽하게 구현된 상태는 아니며 자세한 구현 내용은 Pull Request를 참고 부탁드립니다.
