@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# IHFB Assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🙋🏻‍♂️Applicant
 
-## Available Scripts
+**Jung Young Jun**
 
-In the project directory, you can run:
+[![img](./md-images/83502672.jpeg)](https://avatars.githubusercontent.com/u/83502672?v=4)
 
-### `npm start`
+[github](https://github.com/dudwns0921)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 📒Usage
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 개발 모드로 실행하기
 
-### `npm test`
+```
+> npm run start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## ⚡프로젝트 개요
 
-### `npm run build`
+**React**를 활용해 만든 계산기 앱입니다. 프로젝트 구조는 아래와 같습니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![image-20220919085857091](md-images/image-20220919085857091.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- ### Input : React로 만든 Keypad에 해당
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- ### Calculator : Class로 만든 계산기 인스턴스
 
-### `npm run eject`
+- ### Display : React로 만든 계산기 화면 부분에 해당
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+___
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. 사용자가 **Input**에서 숫자와 연산자를 입력
+2. **Calculator**에서 숫자와 연산자로 수식을 만들거나 해당 수식을 계산해 결과를 도출
+3. **Display**는 **Calculator**에서 만든 수식이나 도출된 결과를 화면에 출력
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Calculator**에서는 `eval()`을 사용할 수 없고, 사칙연산의 우선순위를 반영해야 하기 때문에 중위 표기법으로 입력된 수식을 후위 표기법으로 바꿔서 계산을 진행합니다.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## ⚙기능
 
-## Learn More
+### 사칙연산 계산
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+문자열로 입력된 수식을 후위표기법으로 바꿔서 계산하기 때문에 긴 수식이라도 모두 계산이 가능합니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<img src="md-images/image-20220919094450006.png" alt="image-20220919094450006" style="zoom:50%;" />	<img src="md-images/image-20220919094508947.png" alt="image-20220919094508947" style="zoom:50%;" />		
 
-### Code Splitting
+음수도 계산 가능합니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<img src="md-images/image-20220919100437045.png" alt="image-20220919100437045" style="zoom:50%;" />	<img src="md-images/image-20220919100453973.png" alt="image-20220919100453973" style="zoom:50%;" />	
 
-### Analyzing the Bundle Size
+소수도 계산 가능합니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<img src="md-images/image-20220919100617654.png" alt="image-20220919100617654" style="zoom:50%;" />	<img src="md-images/image-20220919100632453.png" alt="image-20220919100632453" style="zoom:50%;" />`
 
-### Making a Progressive Web App
+### 지우기
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+입력한 수식을 뒤에서부터 한 칸씩 지웁니다.
 
-### Advanced Configuration
+<img src="md-images/image-20220919094644618.png" alt="image-20220919094644618" style="zoom:50%;" />	<img src="md-images/image-20220919094712403.png" alt="image-20220919094712403" style="zoom:50%;" />			
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 초기화
 
-### Deployment
+입력한 수식을 모두 초기화합니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<img src="md-images/image-20220919094847351.png" alt="image-20220919094847351" style="zoom:50%;" />	<img src="md-images/image-20220919094906718.png" alt="image-20220919094906718" style="zoom:50%;" />	
 
-### `npm run build` fails to minify
+### 부호변경
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+입력한 숫자의 부호를 변경합니다. 
+
+<img src="md-images/image-20220919094956075.png" alt="image-20220919094956075" style="zoom:50%;" />	<img src="md-images/image-20220919095010542.png" alt="image-20220919095010542" style="zoom:50%;" />			
+
+## 🤔기타 참고사항
+
+아직 완벽하게 구현된 상태는 아니며 자세한 구현 내용은 Pull Request를 참고 부탁드립니다.
+
+
+
